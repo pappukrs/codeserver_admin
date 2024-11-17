@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaBold, FaFont, FaPalette } from 'react-icons/fa';
-import { SketchPicker } from 'react-color';  // For color picking
-import { Modal } from './Modal';  // Modal component we'll create
+import { SketchPicker } from 'react-color';  
+import { Modal } from './Modal';  
 
 const AdminForm = () => {
   const [formData, setFormData] = useState({
@@ -14,8 +14,8 @@ const AdminForm = () => {
   const [selectedStyle, setSelectedStyle] = useState<React.CSSProperties>({});
   const [contentPreview, setContentPreview] = useState<string>('');
   const [selectedColor, setSelectedColor] = useState<string>('');
-  const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);  // Track color picker modal state
-  const [selectedFont, setSelectedFont] = useState<string>('Arial'); // Default font
+  const [isColorPickerOpen, setIsColorPickerOpen] = useState(false);  
+  const [selectedFont, setSelectedFont] = useState<string>('Arial'); 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, files } = e.target as HTMLInputElement & { files?: FileList };
@@ -72,7 +72,7 @@ const AdminForm = () => {
       <motion.input
         type="text"
         name="title"
-        placeholder="Title"
+        placeholder="Enter Blog Title"
         onChange={handleChange}
         className="border rounded p-2"
         required
@@ -86,21 +86,21 @@ const AdminForm = () => {
         <button
           type="button"
           onClick={() => setSelectedStyle({ fontWeight: 'bold' })}
-          className="p-2 bg-gray-200 rounded"
+          className="p-2 bg-gray-200 rounded hover:bg-gray-300 transition duration-200"
         >
           <FaBold />
         </button>
         <button
           type="button"
           onClick={() => setSelectedStyle({ fontSize: '1.5rem' })}
-          className="p-2 bg-gray-200 rounded"
+          className="p-2 bg-gray-200 rounded hover:bg-gray-300 transition duration-200"
         >
           <FaFont />
         </button>
         <button
           type="button"
-          onClick={toggleColorPicker}  // Open the color picker modal
-          className="p-2 bg-gray-200 rounded"
+          onClick={toggleColorPicker}
+          className="p-2 bg-gray-200 rounded hover:bg-gray-300 transition duration-200"
         >
           <FaPalette />
         </button>
@@ -128,13 +128,17 @@ const AdminForm = () => {
         className="border rounded p-2"
         rows={3}
       />
-      <button
+
+      {/* Add Styled Content Button */}
+      <motion.button
         type="button"
         onClick={handleAddStyledContent}
-        className="bg-green-500 text-white py-1 rounded"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="bg-green-500 w-32 text-white py-1 rounded shadow hover:bg-green-600 transition duration-200"
       >
-        Add Styled Content
-      </button>
+        Add Content
+      </motion.button>
 
       {/* Styled Content Preview */}
       <motion.div
@@ -185,11 +189,15 @@ const AdminForm = () => {
       </div>
 
       {/* Submit Button */}
-      <button type="submit" className="bg-blue-500 text-white py-2 rounded">
+      <motion.button
+        type="submit"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="bg-blue-500 w-32 text-white py-2 rounded shadow hover:bg-blue-600 transition duration-200"
+      >
         Submit
-      </button>
+      </motion.button>
 
-      {/* Color Picker Modal */}
       {isColorPickerOpen && (
         <Modal onClose={toggleColorPicker}>
           <div className="p-4">
